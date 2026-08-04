@@ -11,6 +11,10 @@
         "/^git -C \"c:\\\\Users\\\\kunal sarkar\\\\Downloads\\\\another_pages\" status --short --branch$/": {
             "approve": true,
             "matchCommandLine": true
+        },
+        "/^cd \"c:\\\\Users\\\\kunal sarkar\\\\Downloads\\\\another_pages\"; corepack pnpm build$/": {
+            "approve": true,
+            "matchCommandLine": true
         }
     }
 }
