@@ -6,6 +6,7 @@ import PricingPage from '../pages/PricingPage';
 import ResourcesPage from '../pages/ResourcesPage';
 import SolutionsPage from '../pages/SolutionsPage';
 import LoginPage from '../pages/LoginPage';
+import Footer from '../components/Footer';
 
 const navItems = [
   ['/', 'Home'],
@@ -21,7 +22,7 @@ function Shell() {
     <div className="app-shell">
       <header className="topbar glass-panel">
         <div>
-          <span className="brand-mark">ANOTHER</span>
+          <span className="brand-mark">cryptoXneuron</span>
           <h1>Customer Intelligence</h1>
         </div>
         <nav aria-label="Main navigation" className="nav-links">
@@ -49,6 +50,8 @@ function Shell() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
+
+      <Footer />
     </div>
   );
 }
