@@ -19,6 +19,10 @@
         "/^Set-Location \"c:\\\\Users\\\\kunal sarkar\\\\Downloads\\\\another_pages\"; corepack pnpm add ogl$/": {
             "approve": true,
             "matchCommandLine": true
+        },
+        "/^Set-Location \"c:\\\\Users\\\\kunal sarkar\\\\Downloads\\\\another_pages\"; corepack pnpm build$/": {
+            "approve": true,
+            "matchCommandLine": true
         }
     }
 }

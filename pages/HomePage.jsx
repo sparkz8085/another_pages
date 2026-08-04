@@ -23,6 +23,13 @@ const stats = [
   { label: 'Models', value: 'Active', icon: Activity },
 ];
 
+const distributionBars = [
+  { label: 'Budget[25%]', widthClass: 'bar-25' },
+  { label: 'Regular[20%]', widthClass: 'bar-20' },
+  { label: 'Premium[40%]', widthClass: 'bar-40' },
+  { label: 'Occasional[15%]', widthClass: 'bar-15' },
+];
+
 export default function HomePage() {
   return (
     <section className="page-section home-page">
@@ -74,10 +81,12 @@ export default function HomePage() {
             <div className="mini-card wide">
               <span>Customer Distribution</span>
               <div className="distribution-bars">
-                <i style={{ width: '25%' }} /><strong style={{ width: '25%' }}>Budget[25%]</strong>
-                <i style={{ width: '20%' }} /><strong style={{ width: '20%' }}>Regular[20%]</strong>
-                <i style={{ width: '40%' }} /><strong style={{ width: '40%' }}>Premium[40%]</strong>
-                <i style={{ width: '15%' }} /><strong style={{ width: '15%' }}>Occasional[15%]</strong>
+                {distributionBars.map((bar) => (
+                  <div key={bar.label} className="distribution-row">
+                    <i className={bar.widthClass} aria-hidden="true" />
+                    <strong>{bar.label}</strong>
+                  </div>
+                ))}
               </div>
             </div>
             <div className="mini-card">
