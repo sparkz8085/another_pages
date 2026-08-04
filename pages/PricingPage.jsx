@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { ArrowRight, Building2, Check, Rocket, Sparkles } from 'lucide-react';
 import { Hyperspeed } from '../components/AnimatedBackgrounds';
 
 const plans = [
@@ -8,6 +9,7 @@ const plans = [
     price: '₹0/month',
     features: ['Basic Analytics', 'Demo Dataset', 'Community Support'],
     cta: 'Start for Free',
+    icon: Sparkles,
   },
   {
     name: 'Professional',
@@ -15,12 +17,14 @@ const plans = [
     features: ['Unlimited Customers', 'AI Predictions', 'Reports', 'API Access'],
     featured: true,
     cta: 'Start Professional',
+    icon: Rocket,
   },
   {
     name: 'Enterprise',
     price: 'Custom Pricing',
     features: ['Dedicated AI Models', 'Custom Integrations', 'Priority Support', 'Team Management'],
     cta: 'Contact Sales',
+    icon: Building2,
   },
 ];
 
@@ -43,16 +47,23 @@ export default function PricingPage() {
             transition={{ delay: index * 0.06 }}
             whileHover={{ y: -8, scale: 1.02 }}
           >
-            {plan.featured && <span className="featured-tag">Most Popular</span>}
+            <div className="pricing-card-top">
+              <span className="card-icon"><plan.icon size={18} strokeWidth={2} aria-hidden="true" /></span>
+              {plan.featured && <span className="featured-tag">Most Popular</span>}
+            </div>
             <h3>{plan.name}</h3>
             <div className="plan-price">{plan.price}</div>
             <ul>
               {plan.features.map((feature) => (
-                <li key={feature}>✔ {feature}</li>
+                <li key={feature} className="feature-list-item">
+                  <Check size={16} strokeWidth={2} aria-hidden="true" />
+                  <span>{feature}</span>
+                </li>
               ))}
             </ul>
-            <a href="https://cryptox-neuron-ai.onrender.com/" className={plan.featured ? 'primary-button full-width' : 'secondary-button full-width'} style={{display: 'inline-block', textAlign: 'center'}}>
-              {plan.cta}
+            <a href="https://cryptox-neuron-ai.onrender.com/" className={plan.featured ? 'primary-button full-width button-with-icon' : 'secondary-button full-width button-with-icon'}>
+              <span>{plan.cta}</span>
+              <ArrowRight size={16} strokeWidth={2} aria-hidden="true" />
             </a>
           </motion.article>
         ))}

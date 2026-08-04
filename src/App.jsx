@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
+import { BarChart3, BookOpen, Home, LayoutGrid, Layers3, LogIn } from 'lucide-react';
 import HomePage from '../pages/HomePage';
 import FeaturesPage from '../pages/FeaturesPage';
 import PricingPage from '../pages/PricingPage';
@@ -7,33 +8,59 @@ import ResourcesPage from '../pages/ResourcesPage';
 import SolutionsPage from '../pages/SolutionsPage';
 import LoginPage from '../pages/LoginPage';
 import Footer from '../components/Footer';
+import Lightfall from '../components/Lightfall';
 
 const navItems = [
-  ['/', 'Home'],
-  ['/features', 'Features'],
-  ['/solutions', 'Solutions'],
-  ['/pricing', 'Pricing'],
-  ['/resources', 'Resources'],
-  ['/login', 'Login'],
+  { to: '/', label: 'Home', icon: Home },
+  { to: '/features', label: 'Features', icon: LayoutGrid },
+  { to: '/solutions', label: 'Solutions', icon: Layers3 },
+  { to: '/pricing', label: 'Pricing', icon: BarChart3 },
+  { to: '/resources', label: 'Resources', icon: BookOpen },
+  { to: '/login', label: 'Login', icon: LogIn },
 ];
 
 function Shell() {
   return (
     <div className="app-shell">
+      <div className="site-lightfall" aria-hidden="true">
+        <Lightfall
+          colors={['#A6C8FF', '#7C4DFF', '#FF9FFC']}
+          backgroundColor="#08111f"
+          speed={0.55}
+          streakCount={3}
+          streakWidth={1}
+          streakLength={0.85}
+          glow={1.15}
+          density={0.65}
+          twinkle={0.35}
+          zoom={3.1}
+          backgroundGlow={0.35}
+          opacity={0.7}
+          mouseInteraction
+          mouseStrength={0.18}
+          mouseRadius={0.85}
+          mouseDampening={0.18}
+          mixBlendMode="screen"
+          className="site-lightfall-canvas"
+        />
+      </div>
+
+      <div className="site-content">
       <header className="topbar glass-panel">
         <div>
           <span className="brand-mark">cryptoXneuron</span>
           <h1>Customer Intelligence</h1>
         </div>
         <nav aria-label="Main navigation" className="nav-links">
-          {navItems.map(([to, label]) => (
+          {navItems.map(({ to, label, icon: Icon }) => (
             <NavLink
               key={to}
               to={to}
               className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
               end={to === '/'}
             >
-              {label}
+              <Icon size={16} strokeWidth={2} aria-hidden="true" />
+              <span>{label}</span>
             </NavLink>
           ))}
         </nav>
@@ -52,6 +79,7 @@ function Shell() {
       </main>
 
       <Footer />
+      </div>
     </div>
   );
 }

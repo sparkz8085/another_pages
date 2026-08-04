@@ -1,25 +1,26 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { Activity, BarChart3, BrainCircuit, Clock3, Layers3, ShieldCheck, Zap } from 'lucide-react';
 import { DarkVeil } from '../components/AnimatedBackgrounds';
 
 const startFreeUrl = 'https://cryptox-neuron-ai.onrender.com/';
 const loginUrl = '/login';
 
 const featureCards = [
-  { title: 'AI Segmentation', description: 'Cluster customers using intelligent models and clear visual profiles.' },
-  { title: 'Smart Analytics', description: 'Track purchasing behavior, preferences, and actionable trends.' },
-  { title: 'Business Insights', description: 'Turn segmentation into growth opportunities with premium dashboards.' },
-  { title: 'Secure Cloud', description: 'Built for secure, scalable, production-ready workflows.' },
-  { title: 'Fast Predictions', description: 'Deliver real-time cluster inference with a polished interface.' },
-  { title: 'Real-time Dashboard', description: 'Monitor live metrics, active models, and model health instantly.' },
+  { title: 'AI Segmentation', description: 'Cluster customers using intelligent models and clear visual profiles.', icon: BrainCircuit },
+  { title: 'Smart Analytics', description: 'Track purchasing behavior, preferences, and actionable trends.', icon: BarChart3 },
+  { title: 'Business Insights', description: 'Turn segmentation into growth opportunities with premium dashboards.', icon: Activity },
+  { title: 'Secure Cloud', description: 'Built for secure, scalable, production-ready workflows.', icon: ShieldCheck },
+  { title: 'Fast Predictions', description: 'Deliver real-time cluster inference with a polished interface.', icon: Zap },
+  { title: 'Real-time Dashboard', description: 'Monitor live metrics, active models, and model health instantly.', icon: Layers3 },
 ];
 
 const stats = [
-  { label: 'Segments', value: '4 AI Clusters' },
-  { label: 'Accuracy', value: '96.2%' },
-  { label: 'Latency', value: '< 120ms' },
-  { label: 'Models', value: 'Active' },
+  { label: 'Segments', value: '4 AI Clusters', icon: Layers3 },
+  { label: 'Accuracy', value: '96.2%', icon: ShieldCheck },
+  { label: 'Latency', value: '< 120ms', icon: Clock3 },
+  { label: 'Models', value: 'Active', icon: Activity },
 ];
 
 export default function HomePage() {
@@ -44,6 +45,7 @@ export default function HomePage() {
           <div className="hero-stats">
             {stats.map((stat) => (
               <motion.div key={stat.label} className="stat-card glass-panel" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <span className="stat-icon"><stat.icon size={16} strokeWidth={2} aria-hidden="true" /></span>
                 <span>{stat.label}</span>
                 <strong>{stat.value}</strong>
               </motion.div>
@@ -53,7 +55,8 @@ export default function HomePage() {
 
         <motion.div className="dashboard-preview glass-panel" initial={{ opacity: 0, scale: 0.94, x: 20 }} animate={{ opacity: 1, scale: 1, x: 0 }} transition={{ delay: 0.14 }}>
           <div className="dashboard-header">
-            <div>
+            <div className="dashboard-title">
+              <span className="panel-icon"><BarChart3 size={16} strokeWidth={2} aria-hidden="true" /></span>
               <p>Premium AI Dashboard</p>
               <h3>Customer Intelligence</h3>
             </div>
@@ -99,7 +102,10 @@ export default function HomePage() {
             transition={{ delay: 0.08 + index * 0.04 }}
             whileHover={{ y: -8, scale: 1.02 }}
           >
-            <span className="feature-index">0{index + 1}</span>
+            <div className="card-headline">
+              <span className="card-icon"><feature.icon size={18} strokeWidth={2} aria-hidden="true" /></span>
+              <span className="feature-index">0{index + 1}</span>
+            </div>
             <h4>{feature.title}</h4>
             <p>{feature.description}</p>
           </motion.article>

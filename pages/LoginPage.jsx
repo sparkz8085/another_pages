@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { ArrowRight, LockKeyhole } from 'lucide-react';
 
 export default function LoginPage() {
   return (
@@ -11,11 +12,17 @@ export default function LoginPage() {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.35 }}
       >
-        <span className="badge">Secure Access</span>
+        <span className="badge badge-inline">
+          <LockKeyhole size={14} strokeWidth={2} aria-hidden="true" />
+          Secure Access
+        </span>
         <h2>Welcome back</h2>
         <p>Sign in to your account or create a new session to continue.</p>
 
-        <a href="https://cryptox-neuron-ai.onrender.com/" className="primary-button full-width" style={{display: 'inline-block', textAlign: 'center'}}>Continue to CryptoX Neuron AI</a>
+        <a href="https://cryptox-neuron-ai.onrender.com/" className="primary-button full-width button-with-icon">
+          <span>Continue to CryptoX Neuron AI</span>
+          <ArrowRight size={16} strokeWidth={2} aria-hidden="true" />
+        </a>
 
         <Link to="/" className="back-link">Back to home</Link>
       </motion.div>
