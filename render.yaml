@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: another-pages
+    env: static
+    buildCommand: corepack pnpm install --frozen-lockfile && corepack pnpm build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
