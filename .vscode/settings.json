@@ -23,6 +23,10 @@
         "/^Set-Location \"c:\\\\Users\\\\kunal sarkar\\\\Downloads\\\\another_pages\"; corepack pnpm build$/": {
             "approve": true,
             "matchCommandLine": true
+        },
+        "/^node -e \"fetch\\('https://script\\.google\\.com/macros/s/AKfycbwtUl3L7gMMAND5LSV0OM2i6LO_ZHM-CcvCYhENfZaiHxnciNPa_TE36DZg2NF63Czc/exec',\\{method:'POST',headers:\\{'Content-Type':'application/json'\\},body:JSON\\.stringify\\(\\{email:'test@example\\.com'\\}\\)\\}\\)\\.then\\(async r=>\\{console\\.log\\('ok',r\\.ok,'status',r\\.status,'type',r\\.type,'url',r\\.url\\);console\\.log\\(await r\\.text\\(\\)\\)\\}\\)\\.catch\\(e=>\\{console\\.error\\(e\\);process\\.exitCode=1\\}\\)\"$/": {
+            "approve": true,
+            "matchCommandLine": true
         }
     }
 }

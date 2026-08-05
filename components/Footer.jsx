@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowRight, BarChart3, Facebook, Linkedin, Mail, Twitter } from 'lucide-react';
 
-const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwtUl3L7gMMAND5LSV0OM2i6LO_ZHM-CcvCYhENfZaiHxnciNPa_TE36DZg2NF63Czc/exec';
+const SUBSCRIPTION_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwtUl3L7gMMAND5LSV0OM2i6LO_ZHM-CcvCYhENfZaiHxnciNPa_TE36DZg2NF63Czc/exec';
 
 const socialLinks = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com', icon: Linkedin },
@@ -11,6 +11,29 @@ const socialLinks = [
 ];
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function getFriendlyErrorMessage(responseMessage, statusCode) {
+  const text = String(responseMessage || '').trim();
+
+  if (!text) {
+    return `Subscription failed with status ${statusCode}.`;
+  }
+
+  const isGooglePageNotFound =
+    text.includes('Page not found') ||
+    text.includes('unable to open the file at present') ||
+    text.includes('docs.google.com');
+
+  if (isGooglePageNotFound) {
+    return 'Subscription service is not available right now. Please check the Google Apps Script Web App deployment URL.';
+  }
+
+  if (text.includes('Email already exists')) {
+    return 'Email already exists';
+  }
+
+  return text;
+}
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -45,52 +68,29 @@ export default function Footer() {
     setStatusType('loading');
 
     try {
-      const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+      await fetch(SUBSCRIPTION_ENDPOINT, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'text/plain;charset=UTF-8',
         },
-        body: JSON.stringify({ email: trimmedEmail }),
+        mode: 'no-cors',
+        body: JSON.stringify({
+          email: trimmedEmail,
+          apiKey: 'AKfycbwtUl3L7gMMAND5LSV0OM2i6LO_ZHM-CcvCYhENfZaiHxnciNPa_TE36DZg2NF63Czc',
+        }),
       });
-
-      const rawBody = await response.text();
-      let responseBody = rawBody;
-
-      try {
-        responseBody = rawBody ? JSON.parse(rawBody) : {};
-      } catch {
-        responseBody = rawBody;
-      }
-
-      const responseMessage = typeof responseBody === 'string'
-        ? responseBody
-        : responseBody?.message || responseBody?.error || responseBody?.status || '';
-
-      if (!response.ok) {
-        const message = responseMessage || `Subscription failed with status ${response.status}.`;
-        if (message.includes('Email already exists')) {
-          setStatusType('error');
-          setStatusMessage('Email already exists');
-        } else {
-          setStatusType('error');
-          setStatusMessage(message);
-        }
-        return;
-      }
-
-      if (String(responseMessage).includes('Email already exists')) {
-        setStatusType('error');
-        setStatusMessage('Email already exists');
-        return;
-      }
 
       setEmail('');
       setStatusType('success');
-      setStatusMessage(responseMessage || 'Subscription successful.');
+      setStatusMessage('Subscription successful.');
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Something went wrong. Please try again.';
       setStatusType('error');
-      setStatusMessage(message.includes('Email already exists') ? 'Email already exists' : 'Unable to subscribe right now. Please try again.');
+      setStatusMessage(
+        message.includes('Email already exists')
+          ? 'Email already exists'
+          : 'Unable to subscribe right now. Please try again.'
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -127,7 +127,7 @@ export default function Footer() {
 
           <div className="footer-right">
             <h3 className="footer-section-title">Stay Updated</h3>
-            <p className="footer-copy">Subscribe to our newsletter for the latest insights and product updates.</p>
+            <p className="footer-copy">Subscribe to our page for the latest releases and product updates.</p>
             <form className="newsletter" onSubmit={handleSubscribe}>
               <input
                 type="email"
