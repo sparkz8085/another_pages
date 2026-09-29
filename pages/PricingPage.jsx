@@ -61,7 +61,7 @@ export default function PricingPage() {
                 </li>
               ))}
             </ul>
-            <a href="https://cryptox-neuron-ai.onrender.com/" className={plan.featured ? 'primary-button full-width button-with-icon' : 'secondary-button full-width button-with-icon'}>
+            <a href={plan.name === 'Professional' ? '/login' : 'https://cryptox-neuron-ai.onrender.com/'} className={plan.featured ? 'primary-button full-width button-with-icon' : 'secondary-button full-width button-with-icon'}>
               <span>{plan.cta}</span>
               <ArrowRight size={16} strokeWidth={2} aria-hidden="true" />
             </a>
