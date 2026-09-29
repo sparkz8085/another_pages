@@ -7,6 +7,7 @@ import PricingPage from '../pages/PricingPage';
 import ResourcesPage from '../pages/ResourcesPage';
 import SolutionsPage from '../pages/SolutionsPage';
 import LoginPage from '../pages/LoginPage';
+import UpgradePage from '../pages/UpgradePage';
 import Footer from '../components/Footer';
 import Lightfall from '../components/Lightfall';
 
@@ -109,6 +110,7 @@ function Shell() {
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/resources" element={<ResourcesPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/upgrade" element={<UpgradePage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         </main>
